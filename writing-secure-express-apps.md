@@ -29,6 +29,7 @@ Another is to use something like authbind or by putting something like nginx or 
 Most express apps are going to deal with user sessions at some point.
 
 Session cookies should have the SECURE and HTTPOnly flags set. This ensures they can only be sent over HTTPS (you are using HTTPS, right?) and there is no script access to the cookie client side.
+
 ```javascript
 app.use(express.session({
   secret: "notagoodsecretnoreallydontusethisone",
@@ -42,7 +43,9 @@ There are plenty of security headers that help improve security with just a line
 
 The easiest way to implement most of these headers in Express is to use the helmet middleware.
 
-    npm install helmet
+```shell
+npm install helmet
+```
 
 Then we can add them to our app.configure for express
 
@@ -77,7 +80,9 @@ To enable CSRF protection let’s add it to the app.configure section. It should
 
 The first line we add is to add csrf tokens to the users session.
 
-    app.use(express.csrf());
+```javascript
+app.use(express.csrf());
+```
 
 Then, since Express v3 did away with dynamic helpers, we use a small middleware to add the token to our locals making it available to templates.
 

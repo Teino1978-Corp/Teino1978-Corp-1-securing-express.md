@@ -22,15 +22,21 @@ Now check how many temp files you have with something like this:
 
 ```shell
 $ ls /tmp | wc -l
-33
+> 33
+```
+
 Next simulate uploading a multipart form:
 
+```shell
 $ curl -X POST -F foo=@tmp/somefile.c http://localhost:9001/test
-ok
+> ok
+```
+
 Go back and check our temp file count:
 
+```shell
 $ ls /tmp | wc -l
-34
+>34
 ```
 
 That's a problem.
@@ -39,7 +45,7 @@ That's a problem.
 
 ### Always delete the temp files when you use bodyParser or multipart middleware
 
-You can prevent this attack by always checking whether req.files is present for endpoints in which you use bodyParser or multipart, and then deleting the temp files. Note that this is every POST endpoint if you did something like app.use(express.bodyParser()).
+You can prevent this attack by always checking whether req.files is present for endpoints in which you use bodyParser or multipart, and then deleting the temp files. Note that this is every POST endpoint if you did something like `app.use(express.bodyParser())`.
 
 This is suboptimal for several reasons:
 
@@ -70,14 +76,16 @@ If you want users to upload files to your endpoint, you could use express.multip
 
 When you create your multipart middleware, you can use the defer option like this:
 
-  express.multipart({defer: true})
+```javascript
+express.multipart({defer: true})
+```
 
 According to the documentation:
 
- defers processing and exposes the multiparty form object as `req.form`.
-`next()` is called without waiting for the form's "end" event.
-This option is useful if you need to bind to the "progress" or "part" events, for example.
-So if you do this you will use multiparty's API assuming that req.form is an instantiated Form instance.
+> defers processing and exposes the multiparty form object as `req.form`.
+> `next()` is called without waiting for the form's "end" event.
+> This option is useful if you need to bind to the "progress" or "part" events, for example.
+> So if you do this you will use multiparty's API assuming that req.form is an instantiated Form instance.
 
 ## Use an upload parsing module directly
 
