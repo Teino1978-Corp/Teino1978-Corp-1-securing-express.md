@@ -56,7 +56,7 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(express.bodyParser()); // This is deprecated and should no longer be used
+  app.use(express.bodyParser());  // Deprecated, do not use. See 3-do-not-use-bodyparser.md below
   app.use(helmet.xframe());
   app.use(helmet.iexss());
   app.use(helmet.contentTypeOptions());
@@ -102,7 +102,7 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.use(express.favicon());
   app.use(express.logger('dev'));
-  app.use(express.bodyParser()); // This is deprecated and should no longer be used
+  app.use(express.bodyParser());  // Deprecated, do not use. See 3-do-not-use-bodyparser.md below
   app.use(helmet.xframe());
   app.use(helmet.iexss());
   app.use(helmet.contentTypeOptions());
